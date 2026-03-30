@@ -93,7 +93,7 @@ const Hero: React.FC = () => {
                     Prove the Impact
                 </Button>
                 <a
-                    href="/Sikandar_Rajput_Python_Django_Resume.pdf"
+                    href="/resume.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full sm:w-auto px-10 py-5 bg-zinc-900 border border-zinc-800 text-zinc-300 font-bold rounded-2xl hover:bg-zinc-800 hover:text-white transition-all flex items-center justify-center gap-2"

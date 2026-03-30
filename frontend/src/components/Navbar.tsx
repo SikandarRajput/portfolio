@@ -8,7 +8,7 @@ const navLinks = [
     { name: 'Projects', href: '/projects' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
-    { name: 'Resume', href: '/Sikandar_Rajput_Python_Django_Resume.pdf', external: true },
+    { name: 'Resume', href: '/resume.pdf', external: true },
 ];
 
 const Navbar: React.FC = () => {

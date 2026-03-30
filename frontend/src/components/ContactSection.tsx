@@ -31,7 +31,7 @@ const ContactSection: React.FC = () => {
                             <ArrowRight className="w-5 h-5" />
                         </Link>
                         <a
-                            href="/Sikandar_Rajput_Python_Django_Resume.pdf"
+                            href="/resume.pdf"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="px-10 py-5 bg-zinc-900 border border-zinc-800 font-bold rounded-2xl hover:border-orange-500/50 transition-all flex items-center gap-3 active:scale-[0.98]"
