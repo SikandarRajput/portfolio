@@ -9,7 +9,7 @@ interface CountUpProps {
 }
 
 const CountUp: React.FC<CountUpProps> = ({ end, duration = 2000, suffix = "" }) => {
-    const [count, setCount] = useState(1);
+    const [count, setCount] = useState<string | number>(1);
     const elementRef = useRef<HTMLSpanElement>(null);
     const [hasAnimated, setHasAnimated] = useState(false);
 
@@ -40,18 +40,20 @@ const CountUp: React.FC<CountUpProps> = ({ end, duration = 2000, suffix = "" }) 
 
         let startTime: number | null = null;
         const startValue = 1;
+        const isDecimal = end % 1 !== 0;
 
         const animate = (timestamp: number) => {
             if (!startTime) startTime = timestamp;
             const progress = Math.min((timestamp - startTime) / duration, 1);
-            const currentCount = Math.floor(progress * (end - startValue) + startValue);
+            const rawValue = progress * (end - startValue) + startValue;
+            const currentCount = isDecimal ? rawValue.toFixed(1) : Math.floor(rawValue);
 
             setCount(currentCount);
 
             if (progress < 1) {
                 requestAnimationFrame(animate);
             } else {
-                setCount(end); // Ensure it ends exactly at 'end'
+                setCount(isDecimal ? end.toFixed(1) : end);
             }
         };
 
@@ -105,22 +107,22 @@ const Hero: React.FC = () => {
             {/* Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full max-w-4xl border-t border-zinc-800/50 pt-12">
                 <div className="flex flex-col items-center">
-                    <span className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 mb-2">
+                    <span className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 mb-2">
                         <CountUp end={40} suffix="%" />
                     </span>
                     <span className="text-sm font-medium text-zinc-500 uppercase tracking-wider">Avg. Efficiency Gain</span>
                 </div>
                 <div className="flex flex-col items-center relative">
                     <span className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 w-px h-12 bg-zinc-800"></span>
-                    <span className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 mb-2">
+                    <span className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 mb-2">
                         <CountUp end={60} suffix="%" />
                     </span>
                     <span className="text-sm font-medium text-zinc-500 uppercase tracking-wider">Costs Reduced (Logistics)</span>
                     <span className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-12 bg-zinc-800"></span>
                 </div>
                 <div className="flex flex-col items-center">
-                    <span className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 mb-2">
-                        99.9%
+                    <span className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 mb-2">
+                        <CountUp end={99.9} suffix="%" />
                     </span>
                     <span className="text-sm font-medium text-zinc-500 uppercase tracking-wider">Architecture Reliability</span>
                 </div>
